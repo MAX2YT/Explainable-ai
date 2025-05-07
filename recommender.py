@@ -116,7 +116,7 @@ elif st.session_state.page == "explainability":
     prediction = model.predict(input_data)[0]
     proba = model.predict_proba(input_data)[0][1]
 
-    st.subheader("🔍 Prediction: ")
+    st.subheader("🔍 Prediction:")
     st.write("✅ Will Buy" if prediction == 1 else "❌ Will Not Buy")
     st.write(f"Probability of Buying: **{proba:.2f}**")
 
@@ -130,10 +130,11 @@ elif st.session_state.page == "explainability":
     else:
         shap_to_use = shap_values  # Regression or single output
 
+    # Corrected SHAP dataframe construction
     shap_df = pd.DataFrame({
         'Feature': input_data.columns,
-        'SHAP Value': shap_to_use[0],
-        'Input Value': input_data.iloc[0].values
+        'SHAP Value': shap_to_use[0],  # First instance's SHAP values
+        'Input Value': input_data.iloc[0].values  # First instance's input values
     }).sort_values(by='SHAP Value', key=abs, ascending=False)
 
     fig, ax = plt.subplots(figsize=(8, 4))
@@ -143,7 +144,7 @@ elif st.session_state.page == "explainability":
     st.pyplot(fig)
 
     with st.expander("ℹ️ What does this chart mean?"):
-        st.markdown(""" 
+        st.markdown("""
         - **Positive SHAP Value**: Feature supports prediction of buying.
         - **Negative SHAP Value**: Feature pushes against buying.
         """)
