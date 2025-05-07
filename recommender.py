@@ -116,7 +116,7 @@ elif st.session_state.page == "explainability":
     prediction = model.predict(input_data)[0]
     proba = model.predict_proba(input_data)[0][1]
 
-    st.subheader("🔍 Prediction:")
+    st.subheader("🔍 Prediction: ")
     st.write("✅ Will Buy" if prediction == 1 else "❌ Will Not Buy")
     st.write(f"Probability of Buying: **{proba:.2f}**")
 
@@ -143,7 +143,7 @@ elif st.session_state.page == "explainability":
     st.pyplot(fig)
 
     with st.expander("ℹ️ What does this chart mean?"):
-        st.markdown("""
+        st.markdown(""" 
         - **Positive SHAP Value**: Feature supports prediction of buying.
         - **Negative SHAP Value**: Feature pushes against buying.
         """)
