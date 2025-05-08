@@ -29,16 +29,16 @@ with st.sidebar:
 product_list = [
     {"name": "Budget Smartphone", "price": 15000, "category": "Electronics", "desc": "Affordable smartphone with all basic features.", "image": "product/budget-phone.jpg"},
     {"name": "Premium Smartphone", "price": 50000, "category": "Electronics", "desc": "Top-tier smartphone with a powerful camera and performance.", "image": "product/premium-phone.jpg"},
-    {"name": "Smart Watch", "price": 3000, "category": "Electronics", "desc": "Keep track of your fitness and health on the go.", "image": "https://via.placeholder.com/120"},
-    {"name": "College Laptop", "price": 30000, "category": "Electronics", "desc": "Budget-friendly laptop for students and everyday use.", "image": "https://via.placeholder.com/120"},
-    {"name": "Gaming Laptop", "price": 70000, "category": "Electronics", "desc": "High-performance laptop for gamers.", "image": "https://via.placeholder.com/120"},
-    {"name": "Laptop Bag", "price": 1000, "category": "Accessories", "desc": "Stylish and durable laptop bag.", "image": "https://via.placeholder.com/120"},
-    {"name": "Men's Wear", "price": 2000, "category": "Fashion", "desc": "Comfortable and stylish clothes for men.", "image": "https://via.placeholder.com/120"},
-    {"name": "55-inch QLED TV", "price": 30000, "category": "Electronics", "desc": "Stunning visuals and immersive sound.", "image": "https://via.placeholder.com/120"},
-    {"name": "PS5 Console", "price": 50000, "category": "Electronics", "desc": "Next-gen gaming console for incredible performance.", "image": "https://via.placeholder.com/120"},
-    {"name": "Women's Fashion Dress", "price": 2500, "category": "Fashion", "desc": "Elegant dress perfect for casual and formal occasions.", "image": "https://via.placeholder.com/120"},
-    {"name": "Makeup Kit", "price": 3000, "category": "Beauty", "desc": "Complete makeup kit with high-quality products.", "image": "https://via.placeholder.com/120"},
-    {"name": "Handbag", "price": 3500, "category": "Accessories", "desc": "Stylish handbag for all occasions.", "image": "https://via.placeholder.com/120"},
+    {"name": "Smart Watch", "price": 3000, "category": "Electronics", "desc": "Keep track of your fitness and health on the go.", "image": "product/smartwatch.jpg"},
+    {"name": "College Laptop", "price": 30000, "category": "Electronics", "desc": "Budget-friendly laptop for students and everyday use.", "image": "product/college-laptop.jpg"},
+    {"name": "Gaming Laptop", "price": 70000, "category": "Electronics", "desc": "High-performance laptop for gamers.", "image": "product/gaming-laptop.jpg"},
+    {"name": "Laptop Bag", "price": 1000, "category": "Accessories", "desc": "Stylish and durable laptop bag.", "image": "product/laptop-bag.jpg"},
+    {"name": "Men's Wear", "price": 2000, "category": "Fashion", "desc": "Comfortable and stylish clothes for men.", "image": "product/mens-wear.jpg"},
+    {"name": "55-inch QLED TV", "price": 30000, "category": "Electronics", "desc": "Stunning visuals and immersive sound.", "image": "product/tv.jpg"},
+    {"name": "PS5 Console", "price": 50000, "category": "Electronics", "desc": "Next-gen gaming console for incredible performance.", "image": "product/ps5.jpg"},
+    {"name": "Women's Fashion Dress", "price": 2500, "category": "Fashion", "desc": "Elegant dress perfect for casual and formal occasions.", "image": "product/women-wear.jpg"},
+    {"name": "Makeup Kit", "price": 3000, "category": "Beauty", "desc": "Complete makeup kit with high-quality products.", "image": "product/makeup.jpg"},
+    {"name": "Handbag", "price": 3500, "category": "Accessories", "desc": "Stylish handbag for all occasions.", "image": "product/hand-bag.jpg"},
 ]
 
 # Product recommendation function
