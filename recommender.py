@@ -74,7 +74,7 @@ def train_model():
     })
     df['Location'] = df['Location'].map({'Urban': 0, 'Suburban': 1, 'Rural': 2})
     df['Gender'] = df['Gender'].map({'Male': 0, 'Female': 1})
-    df['WillBuy'] = ((df['TotalSpent'] > 500) & (df['ClickedAd'] == 1)).astype(int)
+    df['WillBuy'] = ((df['TotalSpent'] > 500) & (df['ClickedAd'] == 0)).astype(int)
     X = df.drop('WillBuy', axis=1)
     y = df['WillBuy']
     model = RandomForestClassifier()
@@ -104,7 +104,7 @@ elif st.session_state.page == "explainability":
     location = st.selectbox("Location", ['Urban', 'Suburban', 'Rural'])
     total_spent = st.slider("Total Amount Spent (₹)", 50.0, 100000.0, 200.0)
     site_visits = st.slider("Number of Site Visits", 1, 20, 5)
-    clicked_ad = st.selectbox("Clicked on Ad?", [1, 0])
+    clicked_ad = st.selectbox("Clicked on Ad?", [0, 1])
     gender = st.selectbox("Gender", ['Male', 'Female'])
 
     location_encoded = {'Urban': 0, 'Suburban': 1, 'Rural': 2}[location]
@@ -121,19 +121,13 @@ elif st.session_state.page == "explainability":
     st.write(f"Probability of Buying: **{proba:.2f}**")
 
     st.subheader("📊 Why did the model predict this?")
-    explainer = shap.TreeExplainer(model, model_output="probability")
+    explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(input_data)
 
-if isinstance(shap_values, list):
-    class_index = list(model.classes_).index(1)  # Ensure correct class
-    shap_to_use = shap_values[class_index]
-else:
-    shap_to_use = shap_values
-
-# Fix shape
-if shap_to_use.ndim == 3:
-    shap_to_use = shap_to_use[:, :, 0]
-
+    if isinstance(shap_values, list):
+        shap_to_use = shap_values[1]
+    else:
+        shap_to_use = shap_values
 
     # ✅ Fix applied here
     if shap_to_use.ndim == 3:
