@@ -124,16 +124,17 @@ elif st.session_state.page == "explainability":
     explainer = shap.TreeExplainer(model)
     shap_values = explainer.shap_values(input_data)
 
-    # If the model is binary classification, shap_values will be a list
     if isinstance(shap_values, list):
-        shap_to_use = shap_values[1]  # Get the SHAP values for the positive class
+        shap_to_use = shap_values[1]
     else:
-        shap_to_use = shap_values  # For regression or single-output models
+        shap_to_use = shap_values
 
-    # Use the 2D SHAP values directly, handle for multiple instances
+    # ✅ Fix applied here
+    if shap_to_use.ndim == 3:
+        shap_to_use = shap_to_use[:, :, 0]
+
     shap_df = pd.DataFrame(shap_to_use, columns=input_data.columns)
 
-    # Plot the SHAP values for the first instance
     fig, ax = plt.subplots(figsize=(8, 4))
     shap_df.iloc[0].sort_values(ascending=False).plot(kind='barh', ax=ax, color='skyblue')
     ax.set_title("Feature Impact on Prediction", fontsize=14)
