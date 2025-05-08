@@ -104,7 +104,7 @@ elif st.session_state.page == "explainability":
     location = st.selectbox("Location", ['Urban', 'Suburban', 'Rural'])
     total_spent = st.slider("Total Amount Spent (₹)", 50.0, 100000.0, 200.0)
     site_visits = st.slider("Number of Site Visits", 1, 20, 5)
-    clicked_ad = st.selectbox("Clicked on Ad?", [0, 1])
+    clicked_ad = st.selectbox("Clicked on Ad?", [1, 0])
     gender = st.selectbox("Gender", ['Male', 'Female'])
 
     location_encoded = {'Urban': 0, 'Suburban': 1, 'Rural': 2}[location]
