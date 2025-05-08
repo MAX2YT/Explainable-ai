@@ -27,7 +27,7 @@ with st.sidebar:
 
 # Sample product data (use real image URLs)
 product_list = [
-    {"name": "Budget Smartphone", "price": 15000, "category": "Electronics", "desc": "Affordable smartphone with all basic features.", "image": "https://m.media-amazon.com/images/I/418q4Gz1YjL._SX300_SY300_QL70_FMwebp_.jpg"},
+    {"name": "Budget Smartphone", "price": 15000, "category": "Electronics", "desc": "Affordable smartphone with all basic features.", "image": ""},
     {"name": "Premium Smartphone", "price": 50000, "category": "Electronics", "desc": "Top-tier smartphone with a powerful camera and performance.", "image": "https://via.placeholder.com/120"},
     {"name": "Smart Watch", "price": 3000, "category": "Electronics", "desc": "Keep track of your fitness and health on the go.", "image": "https://via.placeholder.com/120"},
     {"name": "College Laptop", "price": 30000, "category": "Electronics", "desc": "Budget-friendly laptop for students and everyday use.", "image": "https://via.placeholder.com/120"},
