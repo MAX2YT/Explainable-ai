@@ -121,13 +121,19 @@ elif st.session_state.page == "explainability":
     st.write(f"Probability of Buying: **{proba:.2f}**")
 
     st.subheader("📊 Why did the model predict this?")
-    explainer = shap.TreeExplainer(model)
+    explainer = shap.TreeExplainer(model, model_output="probability")
     shap_values = explainer.shap_values(input_data)
 
-    if isinstance(shap_values, list):
-        shap_to_use = shap_values[1]
-    else:
-        shap_to_use = shap_values
+if isinstance(shap_values, list):
+    class_index = list(model.classes_).index(1)  # Ensure correct class
+    shap_to_use = shap_values[class_index]
+else:
+    shap_to_use = shap_values
+
+# Fix shape
+if shap_to_use.ndim == 3:
+    shap_to_use = shap_to_use[:, :, 0]
+
 
     # ✅ Fix applied here
     if shap_to_use.ndim == 3:
