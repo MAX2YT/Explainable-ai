@@ -12,13 +12,18 @@ st.set_page_config(page_title="AI Product Recommender", layout="wide", initial_s
 if "page" not in st.session_state:
     st.session_state.page = "explainability"
 
-# Sidebar Navigation
 with st.sidebar:
     st.title("🛒 AI Recommender")
+    
+    # Capture clicks and trigger sidebar collapse
     if st.button("🛍️ Product Catalog"):
         st.session_state.page = "catalog"
+        st.session_state.collapse_sidebar = True
+
     if st.button("🧠 Prediction + Explainability"):
         st.session_state.page = "explainability"
+        st.session_state.collapse_sidebar = True
+        
     st.markdown("---")
     st.markdown("## 💡 Project Overview")
     st.markdown("Predicts whether a customer will purchase a product and explains **why** using SHAP.")
