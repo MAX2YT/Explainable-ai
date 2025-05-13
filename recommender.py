@@ -32,11 +32,7 @@ with st.sidebar:
     st.markdown("Predicts whether a customer will purchase a product and explains **why** using SHAP.")
     st.markdown("🔗 [GitHub Repo](https://github.com/MAX2YT/Explainable-ai.git)")
 
-# Optional: Button to show the sidebar manually
-if st.session_state.sidebar_collapsed:
-    show_sidebar_button = st.button("📂 Show Sidebar", key="show_sidebar_button")
-    if show_sidebar_button:
-        st.session_state.sidebar_collapsed = False
+
 
 # Sample product data (use real image URLs)
 product_list = [
