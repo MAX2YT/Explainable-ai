@@ -6,7 +6,7 @@ import shap
 import matplotlib.pyplot as plt
 
 # Page Configuration
-st.set_page_config(page_title="AI Product Recommender", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="AI Product Recommender", layout="wide", initial_sidebar_state="expanded")
 
 # Navigation state using session_state
 if "page" not in st.session_state:
