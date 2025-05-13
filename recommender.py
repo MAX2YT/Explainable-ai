@@ -165,4 +165,18 @@ elif st.session_state.page == "explainability":
                 st.write(product["desc"])
                 st.markdown(f"**Price:** ₹{product['price']}")
             st.markdown("---")
-
+# Inject JS to collapse the sidebar if flagged
+if st.session_state.get("collapse_sidebar", False):
+    st.markdown(
+        """
+        <script>
+        const sidebar = parent.document.querySelector("section[data-testid='stSidebar']");
+        if (sidebar) {
+            sidebar.style.transform = "translateX(-100%)";
+        }
+        </script>
+        """,
+        unsafe_allow_html=True
+    )
+    # Reset flag to avoid collapsing on every rerun
+    st.session_state.collapse_sidebar = False
