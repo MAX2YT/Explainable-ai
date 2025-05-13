@@ -8,53 +8,37 @@ import matplotlib.pyplot as plt
 # Page Configuration
 st.set_page_config(page_title="AI Product Recommender", layout="wide", initial_sidebar_state="collapsed")
 
-# Navigation state using session_state
+# Initialize session state variables
 if "page" not in st.session_state:
     st.session_state.page = "explainability"
+if "sidebar_collapsed" not in st.session_state:
+    st.session_state.sidebar_collapsed = True  # Default to collapsed
 
+# Sidebar with buttons to toggle state
 with st.sidebar:
     st.title("🛒 AI Recommender")
     
-    # Capture clicks and trigger sidebar collapse
+    # Buttons to trigger page navigation and sidebar collapse
     if st.button("🛍️ Product Catalog"):
         st.session_state.page = "catalog"
-        st.session_state.collapse_sidebar = True
+        st.session_state.sidebar_collapsed = True
 
     if st.button("🧠 Prediction + Explainability"):
         st.session_state.page = "explainability"
-        st.session_state.collapse_sidebar = True
+        st.session_state.sidebar_collapsed = True
         
     st.markdown("---")
     st.markdown("## 💡 Project Overview")
     st.markdown("Predicts whether a customer will purchase a product and explains **why** using SHAP.")
     st.markdown("🔗 [GitHub Repo](https://github.com/MAX2YT/Explainable-ai.git)")
 
-# Optional: "Show Sidebar" Button
-st.markdown(
-    """
-    <style>
-    .show-sidebar-btn {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        background: white;
-        border: 1px solid #ccc;
-        padding: 6px 12px;
-        border-radius: 5px;
-        font-size: 13px;
-        cursor: pointer;
-        z-index: 10000;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-    }
-    </style>
-    <div class="show-sidebar-btn" onclick="window.parent.document.querySelector('section[data-testid=stSidebar]').style.transform = 'translateX(0%)'">
-        📂 Show Sidebar
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+# Optional: Button to show the sidebar manually
+if st.session_state.sidebar_collapsed:
+    show_sidebar_button = st.button("📂 Show Sidebar", key="show_sidebar_button")
+    if show_sidebar_button:
+        st.session_state.sidebar_collapsed = False
 
-# Product list
+# Sample product data (use real image URLs)
 product_list = [
     {"name": "Budget Smartphone", "price": 15000, "category": "Electronics", "desc": "Affordable smartphone with all basic features.", "image": "product/budget-phone.jpg"},
     {"name": "Premium Smartphone", "price": 50000, "category": "Electronics", "desc": "Top-tier smartphone with a powerful camera and performance.", "image": "product/premium-phone.jpg"},
@@ -70,7 +54,7 @@ product_list = [
     {"name": "Handbag", "price": 3500, "category": "Accessories", "desc": "Stylish handbag for all occasions.", "image": "product/hand-bag.jpg"},
 ]
 
-# Recommendation logic
+# Recommendation function
 def recommend_products(age, location, total_spent, gender):
     recommended = []
     if gender == "Female":
@@ -89,7 +73,7 @@ def recommend_products(age, location, total_spent, gender):
             recommended += ["Laptop Bag", "Smart Watch"]
     return recommended
 
-# Cached model training
+# Model training (cached)
 @st.cache_resource
 def train_model():
     np.random.seed(42)
@@ -189,8 +173,8 @@ elif st.session_state.page == "explainability":
                 st.markdown(f"**Price:** ₹{product['price']}")
             st.markdown("---")
 
-# Sidebar auto-collapse (JS injection)
-if st.session_state.get("collapse_sidebar", False):
+# This auto-collapses the sidebar when page loads and persists until user triggers a sidebar event
+if st.session_state.sidebar_collapsed:
     st.markdown(
         """
         <script>
@@ -205,4 +189,3 @@ if st.session_state.get("collapse_sidebar", False):
         """,
         unsafe_allow_html=True
     )
-    st.session_state.collapse_sidebar = False
