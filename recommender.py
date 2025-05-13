@@ -117,7 +117,7 @@ elif st.session_state.page == "explainability":
     proba = model.predict_proba(input_data)[0][1]
 
     st.subheader("🔍 Prediction:")
-    st.write("✅ Will Buy" if prediction == 1 else "❌ Will Not Buy")
+    st.write("✅ Will Buy" if prediction == 0 else "❌ Will Not Buy")
     st.write(f"Probability of Buying: **{proba:.2f}**")
 
     st.subheader("📊 Why did the model predict this?")
