@@ -28,9 +28,33 @@ with st.sidebar:
     st.markdown("## 💡 Project Overview")
     st.markdown("Predicts whether a customer will purchase a product and explains **why** using SHAP.")
     st.markdown("🔗 [GitHub Repo](https://github.com/MAX2YT/Explainable-ai.git)")
-    
 
-# Sample product data (use real image URLs)
+# Optional: "Show Sidebar" Button
+st.markdown(
+    """
+    <style>
+    .show-sidebar-btn {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: white;
+        border: 1px solid #ccc;
+        padding: 6px 12px;
+        border-radius: 5px;
+        font-size: 13px;
+        cursor: pointer;
+        z-index: 10000;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+    </style>
+    <div class="show-sidebar-btn" onclick="window.parent.document.querySelector('section[data-testid=stSidebar]').style.transform = 'translateX(0%)'">
+        📂 Show Sidebar
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Product list
 product_list = [
     {"name": "Budget Smartphone", "price": 15000, "category": "Electronics", "desc": "Affordable smartphone with all basic features.", "image": "product/budget-phone.jpg"},
     {"name": "Premium Smartphone", "price": 50000, "category": "Electronics", "desc": "Top-tier smartphone with a powerful camera and performance.", "image": "product/premium-phone.jpg"},
@@ -46,7 +70,7 @@ product_list = [
     {"name": "Handbag", "price": 3500, "category": "Accessories", "desc": "Stylish handbag for all occasions.", "image": "product/hand-bag.jpg"},
 ]
 
-# Product recommendation function
+# Recommendation logic
 def recommend_products(age, location, total_spent, gender):
     recommended = []
     if gender == "Female":
@@ -65,7 +89,7 @@ def recommend_products(age, location, total_spent, gender):
             recommended += ["Laptop Bag", "Smart Watch"]
     return recommended
 
-# Synthetic data + cached model training
+# Cached model training
 @st.cache_resource
 def train_model():
     np.random.seed(42)
@@ -134,7 +158,6 @@ elif st.session_state.page == "explainability":
     else:
         shap_to_use = shap_values
 
-    # ✅ Fix applied here
     if shap_to_use.ndim == 3:
         shap_to_use = shap_to_use[:, :, 0]
 
@@ -165,18 +188,21 @@ elif st.session_state.page == "explainability":
                 st.write(product["desc"])
                 st.markdown(f"**Price:** ₹{product['price']}")
             st.markdown("---")
-# Inject JS to collapse the sidebar if flagged
+
+# Sidebar auto-collapse (JS injection)
 if st.session_state.get("collapse_sidebar", False):
     st.markdown(
         """
         <script>
-        const sidebar = parent.document.querySelector("section[data-testid='stSidebar']");
-        if (sidebar) {
-            sidebar.style.transform = "translateX(-100%)";
-        }
+        window.addEventListener('load', function() {
+            const sidebar = window.parent.document.querySelector("section[data-testid='stSidebar']");
+            if (sidebar) {
+                sidebar.style.transition = "transform 0.3s ease-in-out";
+                sidebar.style.transform = "translateX(-100%)";
+            }
+        });
         </script>
         """,
         unsafe_allow_html=True
     )
-    # Reset flag to avoid collapsing on every rerun
     st.session_state.collapse_sidebar = False
