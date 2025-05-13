@@ -23,7 +23,7 @@ with st.sidebar:
     st.markdown("## 💡 Project Overview")
     st.markdown("Predicts whether a customer will purchase a product and explains **why** using SHAP.")
     st.markdown("🔗 [GitHub Repo](https://github.com/MAX2YT/Explainable-ai.git)")
-    st.markdown("📄 [Docs](https://your-docs-link.com)")
+    
 
 # Sample product data (use real image URLs)
 product_list = [
