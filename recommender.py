@@ -113,7 +113,7 @@ elif st.session_state.page == "explainability":
     input_data = pd.DataFrame([[age, location_encoded, total_spent, site_visits, clicked_ad, gender_encoded]],
                               columns=['Age', 'Location', 'TotalSpent', 'NumSiteVisits', 'ClickedAd', 'Gender'])
 
-    prediction = model.predict(input_data)[0]
+    prediction = model.predict(input_data)[1]
     proba = model.predict_proba(input_data)[0][1]
 
     st.subheader("🔍 Prediction:")
